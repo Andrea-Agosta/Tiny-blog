@@ -10,15 +10,16 @@ const Home = () => {
   const [categories, setCategories] = useState<string[]>([] as string[]);
 
   useEffect(() => {
+    //todo add fetch when the components are done
   }, [])
-  postsData.map(data => !categories.includes(data.tags[0]) && setCategories(prev => [...prev, data.tags[0]]));
 
-  // const array = categories.map(category => postsData.filter(post => post.tags[0] === category))
+  postsData.map(data => !categories.includes(data.tags[0]) && setCategories(prev => [...prev, data.tags[0]]));
+  const fileredPostFromCategory = categories.map(category => postsData.filter(post => post.tags[0] === category))
 
   return (
     <section className='p-10'>
-      <div className='grid grid-cols-4 gap-6'>
-        {categories.map((category, index) => <Section key={index} category={category} postData={postsData} userData={usersData} />)}
+      <div className='grid grid-cols-1 gap-6'>
+        {categories.map((category, index) => <Section key={index} category={category} postData={fileredPostFromCategory[index]} userData={usersData} />)}
       </div>
     </section>
   )

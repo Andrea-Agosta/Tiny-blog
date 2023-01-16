@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Card from '../components/Card';
 import { PostState, UserState } from '../type';
-import './Section.css';
 
 interface SectionState {
   category: string;
@@ -10,28 +9,28 @@ interface SectionState {
 }
 
 const Section = ({ category, postData, userData }: SectionState) => {
-  const [showSection, setshowSection] = useState('invisible');
+  const [showSection, setshowSection] = useState('invisible sm:visible');
   const handleclick = () => {
-    showSection === 'invisible' ? setshowSection('visible') : setshowSection('invisible');
+    showSection === 'invisible sm:visible' ? setshowSection('visible sm:invisible') : setshowSection('invisible sm:visible');
   };
 
   return (
-    // <section className='p-10'>
-    //   <div className='grid grid-cols-2 gap-6'>
-    //     <h2 className='p-10 border rounded-xl shadow' >{category}</h2>
-    //   </div>
-    //   {
-    //     // articles.map(article => {
-    //     //   const author: UserState[] = userData.filter(user => user.id === article.userId);
-    //     //   return <Card article={article} author={author[0]} />;
-    //     // })
-    //   }
-    // </section>
-
-    <section className="">
-      <button className="bg-gray-200 hover:bg-gray-300 rounded-none outline-none w-full text-left cursor-pointer p-4 transition duration-200 ease-in-out font-medium text-lg" onClick={handleclick}>{category}</button>
-      <div className={`bg-yellow-300 p-4 transition duration-200 ease-in-out overflow-hidden' ${showSection}`} >
-        <p>Content for section 3</p>
+    <section>
+      <button
+        className="bg-[#2E4057] hover:bg-[#233143] text-[#EFF1F3] rounded-none outline-none w-full text-left cursor-pointer p-4 transition duration-200 ease-in-out font-medium text-lg"
+        onClick={handleclick}
+      >
+        {category.replace(/\b[a-z]/g, letter => letter.toUpperCase())}
+      </button>
+      <div className={`bg-[#048BA8] p-4 transition duration-200 ease-in-out overflow-hidden' ${showSection}`} >
+        <div className='grid grid-cols-4 gap-6'>
+          {
+            postData.map(article => {
+              const author: UserState[] = userData.filter(user => user.id === article.userId);
+              return <Card article={article} author={author[0]} />
+            })
+          }
+        </div>
       </div>
     </section>
   )

@@ -8,7 +8,7 @@ interface IState {
 
 export default function Card({ article, author }: IState) {
   return (
-    <article className="flex flex-col border-2 rounded-2xl p-5 drop-shadow-md ">
+    <article className="flex flex-col border-2 rounded-2xl p-5 drop-shadow-md bg-[#EFF1F3]">
       <figure className="overflow-hidden rounded-lg shadow h-52" >
         <img
           src={`https://picsum.photos/id/${article.id + 100}/400/200`}
@@ -25,7 +25,7 @@ export default function Card({ article, author }: IState) {
       </div>
       <Link
         to={`/aricle/${article.id}`}
-        className="inline-block rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-center font-medium text-white hover:bg-indigo-700 mt-10"
+        className="inline-block rounded-md border border-transparent bg-[#F18F01] py-3 px-8 text-center font-medium text-white hover:bg-[#CB7A01] mt-10"
       >
         Read Article
       </Link>
