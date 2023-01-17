@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { PostState, UserState } from "../type"
+import { PostState } from "../type"
 
 interface IState {
   article: PostState;
@@ -7,11 +7,11 @@ interface IState {
 
 export default function Card({ article }: IState) {
   return (
-    <article className="flex flex-col border-2 rounded-2xl p-5 drop-shadow-md bg-[#EFF1F3]">
-      <figure className="overflow-hidden rounded-lg shadow h-52" >
+    <article className="flex flex-col border-2 rounded-2xl p-5 drop-shadow-md bg-[#EFF1F3] max-w-md">
+      <figure className="overflow-hidden rounded-lg" >
         <img
-          src={`https://picsum.photos/id/${article.id + 100}/400/200`}
-          alt="article"
+          src={`https://picsum.photos/id/${article.id + 100}/400/310`}
+          alt={article.tags[0]}
         />
       </figure>
       <div className="h-60">

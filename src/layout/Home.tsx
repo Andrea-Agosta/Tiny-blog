@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react';
 import Section from '../components/Section';
-import mockPosts from '../mockData/post.json';
-import mockUsers from '../mockData/users.json';
-import { PostState, UserState } from '../type';
+import { PostState } from '../type';
 
 const Home = () => {
-  const [postsData, setPostsData] = useState<PostState[]>(mockPosts.posts);
+  const [postsData, setPostsData] = useState<PostState[]>([]);
   const [categories, setCategories] = useState<string[]>([] as string[]);
 
   useEffect(() => {
-    //todo add fetch when the components are done
+    fetch('https://dummyjson.com/posts?limit=130')
+      .then(res => res.json())
+      .then(res => setPostsData(res.posts));
   }, [])
-  // postsData.map(data => !categories.includes(data.tags[0]) && setCategories(prev => {
-  //   const capitalizeCategory = data.tags[0].replace(/\b[a-z]/g, letter => letter.toUpperCase());
-  //   return [...prev, capitalizeCategory];
-  // }));
-  postsData.map(data => !categories.includes(data.tags[0]) && setCategories(prev => [...prev, data.tags[0]]));
 
-  const fileredPostFromCategory = categories.slice(0, 5).map(category => postsData.filter(post => post.tags[0] === category))
+  postsData.map(data => {
+    const capitalizeText = data.tags[0][0].toUpperCase() + data.tags[0].slice(1);
+    return !categories.includes(capitalizeText) && setCategories(prev => [...prev, capitalizeText])
+  });
+
+  const fileredPostFromCategory = categories.slice(0, 5).map(category => postsData.filter(post => post.tags[0] === category.toLowerCase()))
 
   return (
-    <section className='p-10'>
+    <section className='p-3 md:p-10'>
       <div className='grid grid-cols-1 gap-6'>
         {categories.slice(0, 5).map((category, index) => <Section key={index} category={category} postData={fileredPostFromCategory[index]} />)}
       </div>

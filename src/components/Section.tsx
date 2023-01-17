@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Card from '../components/Card';
-import { PostState, UserState } from '../type';
+import { PostState } from '../type';
 
 interface SectionState {
   category: string;
@@ -8,9 +8,9 @@ interface SectionState {
 }
 
 const Section = ({ category, postData }: SectionState) => {
-  const [showSection, setshowSection] = useState('invisible sm:visible');
+  const [showSection, setshowSection] = useState('hidden sm:flex');
   const handleclick = () => {
-    showSection === 'invisible sm:visible' ? setshowSection('visible sm:invisible') : setshowSection('invisible sm:visible');
+    showSection === 'hidden sm:flex' ? setshowSection('flex sm:hidden') : setshowSection('hidden sm:flex');
   };
 
   return (
@@ -22,7 +22,7 @@ const Section = ({ category, postData }: SectionState) => {
         {category}
       </button>
       <div className={`bg-white p-4 transition duration-200 ease-in-out overflow-hidden' ${showSection}`} >
-        <div className='grid grid-cols-4 gap-6'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
           {postData.map(article => <Card key={article.id} article={article} />)}
         </div>
       </div>
