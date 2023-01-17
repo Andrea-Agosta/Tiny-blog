@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { PostState, UserState } from '../type';
-import mockPosts from '../mockData/post.json';
-import mockUsers from '../mockData/users.json';
 import { Link } from 'react-router-dom';
 
 const Article = () => {
+  const [postsData, setPostsData] = useState<PostState>({} as PostState);
+  const [usersData, setUsersData] = useState<UserState>({} as UserState);
   let idFromUrl = -1;
   let regex = /\/([0-9]+)(?=[^/]*$)/;
   const url: string = window.location.href;
@@ -12,16 +12,25 @@ const Article = () => {
   if (partialUrl) {
     idFromUrl = Number(partialUrl[1]);
   }
-  const [postsData, setPostsData] = useState<PostState>(mockPosts.posts.find(post => post.id === idFromUrl) as PostState);
-  const [usersData, setUsersData] = useState<UserState>(mockUsers.users.find(user => user.id === postsData.userId) as UserState);
 
   useEffect(() => {
-  }, [])
+    fetch(`https://dummyjson.com/posts/${idFromUrl}`)
+      .then(res => res.json())
+      .then(res => {
+        setPostsData(res);
+        return res.userId;
+      })
+      .then(id => {
+        fetch(`https://dummyjson.com/users/${id}`)
+          .then(res => res.json())
+          .then(res => setUsersData(res))
+      })
+  }, [idFromUrl])
 
   return (
-    <article className=" border-2 rounded-2xl p-5 drop-shadow-md bg-[#EFF1F3] m-20">
-      <div className='flex flex-row'>
-        <div className="w-2/3 p-5 pt-0">
+    <article className=" border-2 rounded-2xl p-5 drop-shadow-md bg-[#EFF1F3] m-3 md:m-20">
+      <div className='flex flex-col-reverse md:flex-row'>
+        <div className="md:w-2/3 p-5 pt-0">
           <h1 className="mt-5 font text-4xl font-bold tracking-tight text-[#2F2D2E]">
             {postsData.title}
           </h1>
@@ -29,24 +38,25 @@ const Article = () => {
             {postsData.body}
           </p>
         </div>
-        <figure className="overflow-hidden rounded-lg shadow h-52" >
+        <figure className="overflow-hidden " >
           <img
-            src={`https://picsum.photos/id/${postsData.id + 100}/400/200`}
+            src={`https://picsum.photos/id/${postsData.id + 100}/400/400`}
             alt="article"
+            className='rounded-lg'
           />
         </figure>
       </div>
       <div className='ml-5 pb-5'>
-        <span className="bg-green-700 text-white px-2 py-1 rounded-full text-xs font-medium">{postsData.tags[0]}</span>
+        {/* <span className="bg-green-700 text-white px-2 py-1 rounded-full text-xs font-medium">{postsData.tags[0][0].toUpperCase() + postsData.tags[0].slice(1)}</span> */}
         <p className="mt-6 text-lg text-[#2E4057] mb-1"> Written by: </p>
-        <div className='flex justify-between'>
-          <div className='border-2 shadow-lg w-80 flex p-4 h-20'>
+        <div className='flex justify-between flex-col md:flex-row'>
+          <Link to={`/author/${postsData.userId}/posts`} className='border-2 shadow-lg flex p-4 rounded-lg'>
             <img src={usersData.image} alt='author avatar' className="overflow-hidden rounded-full shadow h-10" />
-            <p className="text-lg text-[#2E4057] ml-5 mt-2"> {usersData.firstName} {usersData.lastName} </p>
-          </div>
+            <p className="text-lg text-[#2E4057] ml-5 md:mt-2 md:pr-5"> {usersData.firstName} {usersData.lastName} </p>
+          </Link>
           <Link
             to={`/`}
-            className="inline-block rounded-md border border-transparent bg-[#F18F01] py-3 px-8 text-center font-medium text-white hover:bg-[#CB7A01] mt-7 mr-5"
+            className="inline-block rounded-md border border-transparent bg-[#F18F01] py-3 px-8 text-center font-medium text-white hover:bg-[#CB7A01] mt-7 md:mr-5"
           >
             Back to Home
           </Link>
