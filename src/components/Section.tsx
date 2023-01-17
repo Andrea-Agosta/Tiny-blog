@@ -5,10 +5,9 @@ import { PostState, UserState } from '../type';
 interface SectionState {
   category: string;
   postData: PostState[];
-  userData: UserState[];
 }
 
-const Section = ({ category, postData, userData }: SectionState) => {
+const Section = ({ category, postData }: SectionState) => {
   const [showSection, setshowSection] = useState('invisible sm:visible');
   const handleclick = () => {
     showSection === 'invisible sm:visible' ? setshowSection('visible sm:invisible') : setshowSection('invisible sm:visible');
@@ -20,16 +19,11 @@ const Section = ({ category, postData, userData }: SectionState) => {
         className="bg-[#2E4057] hover:bg-[#233143] text-[#EFF1F3] rounded-none outline-none w-full text-left cursor-pointer p-4 transition duration-200 ease-in-out font-medium text-lg"
         onClick={handleclick}
       >
-        {category.replace(/\b[a-z]/g, letter => letter.toUpperCase())}
+        {category}
       </button>
-      <div className={`bg-[#048BA8] p-4 transition duration-200 ease-in-out overflow-hidden' ${showSection}`} >
+      <div className={`bg-white p-4 transition duration-200 ease-in-out overflow-hidden' ${showSection}`} >
         <div className='grid grid-cols-4 gap-6'>
-          {
-            postData.map(article => {
-              const author: UserState[] = userData.filter(user => user.id === article.userId);
-              return <Card article={article} author={author[0]} />
-            })
-          }
+          {postData.map(article => <Card key={article.id} article={article} />)}
         </div>
       </div>
     </section>
