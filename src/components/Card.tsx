@@ -12,6 +12,7 @@ export default function Card({ article }: IState) {
         <img
           src={`https://picsum.photos/id/${article.id + 100}/400/310`}
           alt={article.tags[0]}
+          className='h-64'
         />
       </figure>
       <div className="h-60">
