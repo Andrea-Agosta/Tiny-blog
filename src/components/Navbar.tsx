@@ -1,10 +1,11 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom'
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
-  // { name: 'Team', href: '#', current: false },
+  { name: 'Authors', href: '/authors', current: false },
   // { name: 'Projects', href: '#', current: false },
   // { name: 'Calendar', href: '#', current: false },
 ]
@@ -33,8 +34,8 @@ export default function Navbar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <p className="block h-8 w-auto lg:hidden text-[#F18F01] text-xl"> Tiny Blog </p>
-                  <p className="hidden h-8 w-auto lg:block text-[#F18F01] text-xl"> Tiny Blog </p>
+                  <Link to={'/'} className="block h-8 w-auto lg:hidden text-[#F18F01] text-xl"> Tiny Blog </Link>
+                  <Link to={'/'} className="hidden h-8 w-auto lg:block text-[#F18F01] text-xl"> Tiny Blog </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -43,7 +44,7 @@ export default function Navbar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-[#F18F01] text-white' : 'text-gray-300 hover:bg-[#F18F01] hover:text-white',
+                          item.current ? 'hover:bg-[#F18F01] text-white' : 'text-gray-300 hover:bg-[#F18F01] hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}

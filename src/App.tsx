@@ -5,6 +5,7 @@ import Home from './layout/Home';
 import Article from './layout/Article';
 import Footer from './components/Footer';
 import { AuthorPosts } from './layout/AuthorPosts';
+import AuthorList from './layout/AuthorList';
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/article/:id" element={<Article />}></Route>
-          <Route path="/author/:id/posts" element={<AuthorPosts />}></Route>
+          <Route path="/authors" element={<AuthorList />}></Route>
+          <Route path="/authors/:id/posts" element={<AuthorPosts />}></Route>
         </Routes>
       </main>
       <Footer />

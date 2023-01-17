@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { PostState, UserState } from '../type';
 import { Link } from 'react-router-dom';
+import AuthorsBadge from '../components/AuthorsBadge';
 
 const Article = () => {
   const [postsData, setPostsData] = useState<PostState>({} as PostState);
@@ -50,10 +51,7 @@ const Article = () => {
         {/* <span className="bg-green-700 text-white px-2 py-1 rounded-full text-xs font-medium">{postsData.tags[0][0].toUpperCase() + postsData.tags[0].slice(1)}</span> */}
         <p className="mt-6 text-lg text-[#2E4057] mb-1"> Written by: </p>
         <div className='flex justify-between flex-col md:flex-row'>
-          <Link to={`/author/${postsData.userId}/posts`} className='border-2 shadow-lg flex p-4 rounded-lg'>
-            <img src={usersData.image} alt='author avatar' className="overflow-hidden rounded-full shadow h-10" />
-            <p className="text-lg text-[#2E4057] ml-5 md:mt-2 md:pr-5"> {usersData.firstName} {usersData.lastName} </p>
-          </Link>
+          <AuthorsBadge id={postsData.userId} url={usersData.image} name={usersData.firstName} lastName={usersData.lastName} />
           <Link
             to={`/`}
             className="inline-block rounded-md border border-transparent bg-[#F18F01] py-3 px-8 text-center font-medium text-white hover:bg-[#CB7A01] mt-7 md:mr-5"
