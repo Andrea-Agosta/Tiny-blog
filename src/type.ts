@@ -13,3 +13,13 @@ export interface UserState {
   "lastName": string,
   "image": string,
 }
+
+export interface CommentsData {
+  "id": number,
+  "body": string,
+  "postId": number,
+  "user": {
+    "id": number,
+    "username": string
+  }
+}
