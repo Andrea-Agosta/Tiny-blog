@@ -9,6 +9,14 @@ Welcome to Tiny Blog, a simple and elegant blogging application built with React
 - List of authors and their respective articles
 - User can see all the post wrote from every author
 
+## Technologies
+- [Dummy JSON API](https://dummyjson.com/) for providing sample data for the application
+- [Auth0](https://auth0.com/) for user authentication
+- [React Router Dom](https://reactrouter.com/en/main) for routing
+- [Tailwind](https://tailwindui.com/) for styling
+- [Typescript](https://www.typescriptlang.org/)
+- [React](https://reactjs.org/)
+
 ## Getting Started
 
 To get started, you will need to clone the repository and install the dependencies.
@@ -26,8 +34,3 @@ $ npm start
 ```
 
 This will start the development server and open the application in your default browser.
-
-## Technologies
-- [Dummy JSON API](https://dummyjson.com/) for providing sample data for the application
-- [Auth0](https://auth0.com/) for user authentication
-- [React Router Dom](https://reactrouter.com/en/main) for routing
