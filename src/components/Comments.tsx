@@ -14,7 +14,7 @@ const Comments = ({ id }: PostId) => {
   }, [id]);
 
   return (
-    <section className="border-2 rounded-2xl p-5 drop-shadow-md bg-[#2E4057] text-white m-3 mt-5 md:m-20">
+    <section className="border-2 rounded-2xl p-5 drop-shadow-md bg-[#2E4057] text-white my-10">
       <h2 className="text-2xl font-medium mb-4">Comments</h2>
       {
         comments?.map(comment => (
@@ -34,8 +34,8 @@ const Comments = ({ id }: PostId) => {
       <div className="bg-[#EFF1F3] rounded-lg p-4">
         <form className="flex flex-col">
           <label className="text-lg font-medium text-[#2E4057]">Leave a comment</label>
-          <textarea className="bg-[#F5F5F5] rounded-lg p-2 text-[#2F2D2E]" placeholder="Write your comment here" ></textarea>
-          <button className='bg-red-600'>Submit</button>
+          <textarea className="bg-[#F5F5F5] rounded-lg p-2 text-[#2F2D2E] border-2" placeholder="Write your comment here" ></textarea>
+          <button className='bg-[#F18F01] rounded-md py-1 mt-2'>Submit</button>
         </form>
       </div>
     </section>

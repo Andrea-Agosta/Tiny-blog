@@ -31,17 +31,17 @@ const Article = () => {
 
   return (
     <>
-      <article className="border-2 rounded-2xl p-5 drop-shadow-md bg-[#EFF1F3] m-3 md:m-20">
-        <div className='flex flex-col-reverse md:flex-row'>
-          <div className="md:w-2/3 p-5 pt-0">
-            <h1 className="mt-5 font text-4xl font-bold tracking-tight text-[#2F2D2E]">
+      <article className="border-2 border-[#2E4057] rounded-2xl p-5 drop-shadow-md bg-[#EFF1F3] mb-0">
+        <div className='flex flex-col-reverse lg:flex-row md:mt-10'>
+          <div className="lg:md:w-2/3 p-5 pt-0">
+            <h1 className="font text-4xl font-bold tracking-tight text-[#2F2D2E] mt-5 lg:mt-0">
               {postsData.title}
             </h1>
             <p className="mt-4 text-xl text-[#2E4057] mb-5">
               {postsData.body}
             </p>
           </div>
-          <figure className="overflow-hidden " >
+          <figure className="overflow-hidden" >
             <img
               src={`https://picsum.photos/id/${postsData.id + 100}/400/400`}
               alt="article"

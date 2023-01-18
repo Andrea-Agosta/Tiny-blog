@@ -20,7 +20,7 @@ const Home = () => {
   const fileredPostFromCategory = categories.slice(0, 5).map(category => postsData.filter(post => post.tags[0] === category.toLowerCase()))
 
   return (
-    <section className='p-3 md:p-10'>
+    <section>
       <div className='grid grid-cols-1 gap-6'>
         {categories.slice(0, 5).map((category, index) => <Section key={index} category={category} postData={fileredPostFromCategory[index]} />)}
       </div>
