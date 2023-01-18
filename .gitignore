@@ -24,3 +24,4 @@ yarn-error.log*
 
 .env
 apiKey.ts
+auth0Config.ts

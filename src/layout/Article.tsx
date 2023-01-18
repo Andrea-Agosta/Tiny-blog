@@ -1,13 +1,27 @@
-import { useEffect, useState } from 'react'
-import { PostState, UserState } from '../type';
+import { ChangeEvent, useEffect, useState } from 'react'
+import { CommentsData, PostState, UserState } from '../type';
 import { Link } from 'react-router-dom';
 import AuthorsBadge from '../components/AuthorsBadge';
 import Comments from '../components/Comments';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Article = () => {
   const [postsData, setPostsData] = useState<PostState>({} as PostState);
   const [usersData, setUsersData] = useState<UserState>({} as UserState);
+  const [comments, setComments] = useState<CommentsData[]>([]);
+  const { user } = useAuth0();
+
   let idFromUrl = -1;
+  const [userComment, setUserComment] = useState<CommentsData>({
+    "id": -1,
+    "body": '',
+    "postId": idFromUrl,
+    "user": {
+      "id": -1,
+      "username": user?.name ? user.name : '',
+    }
+  });
+
   let regex = /\/([0-9]+)(?=[^/]*$)/;
   const url: string = window.location.href;
   const partialUrl = regex.exec(String(url));
@@ -27,7 +41,21 @@ const Article = () => {
           .then(res => res.json())
           .then(res => setUsersData(res))
       })
-  }, [idFromUrl])
+
+    fetch(`https://dummyjson.com/posts/${idFromUrl}/comments`)
+      .then(res => res.json())
+      .then(res => setComments(res.comments));
+  }, [idFromUrl]);
+
+  const handlechange = (event: ChangeEvent<HTMLTextAreaElement>): void => {
+    const comment = event.currentTarget.value;
+    setUserComment(prev => ({ ...prev, body: comment }));
+  };
+
+  const submitComment = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    setComments(prev => [...prev, userComment])
+  };
 
   return (
     <>
@@ -50,7 +78,7 @@ const Article = () => {
           </figure>
         </div>
         <div className='ml-5 pb-5'>
-          {/* <span className="bg-green-700 text-white px-2 py-1 rounded-full text-xs font-medium">{postsData.tags[0][0].toUpperCase() + postsData.tags[0].slice(1)}</span> */}
+          <span className="bg-green-700 text-white px-2 py-1 rounded-full text-xs font-medium">{postsData.tags && postsData.tags[0][0].toUpperCase() + postsData.tags[0].slice(1)}</span>
           <p className="mt-6 text-lg text-[#2E4057] mb-1"> Written by: </p>
           <div className='flex justify-between flex-col md:flex-row'>
             <AuthorsBadge id={postsData.userId} url={usersData.image} name={usersData.firstName} lastName={usersData.lastName} />
@@ -63,7 +91,7 @@ const Article = () => {
           </div>
         </div>
       </article >
-      <Comments id={postsData.id} />
+      <Comments comments={comments} handlechange={handlechange} submitComment={submitComment} />
     </>
   )
 }
