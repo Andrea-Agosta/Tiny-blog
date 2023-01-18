@@ -14,7 +14,7 @@ const Section = ({ category, postData }: SectionState) => {
   };
 
   return (
-    <section>
+    <section className='border-2 border-[#2E4057]'>
       <button
         className="bg-[#2E4057] hover:bg-[#233143] text-[#EFF1F3] rounded-none outline-none w-full text-left cursor-pointer p-4 transition duration-200 ease-in-out font-medium text-lg"
         onClick={handleclick}

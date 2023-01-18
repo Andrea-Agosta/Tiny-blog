@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
+import AuthorsBadge from '../components/AuthorsBadge';
 import Card from '../components/Card';
 import { PostState, UserState } from '../type';
 
 export const AuthorPosts = () => {
   const [posts, setPosts] = useState<PostState[]>([]);
   const [usersData, setUsersData] = useState<UserState>({} as UserState);
-
 
   useEffect(() => {
     let id: string = '';
@@ -22,16 +22,16 @@ export const AuthorPosts = () => {
 
   return (
     <section>
-      <div className='m-3 md:m-5 lg:m-10 flex justify-center'>
-        <div className='border-2 shadow-lg flex p-4 rounded-lg bg-white'>
-          <img src={usersData.image} alt='author avatar' className="overflow-hidden rounded-full shadow h-10" />
-          <p className="text-lg text-[#2E4057] ml-5 mt-2 md:pr-5"> {usersData.firstName} {usersData.lastName} </p>
-        </div>
+      <div className='flex justify-center'>
+        <AuthorsBadge id={usersData.id} url={usersData.image} name={usersData.firstName} lastName={usersData.lastName} />
       </div>
-      <div className='m-3 md:m-5 lg:m-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-        {posts?.map(post => <Card key={post.id} article={post} />)}
+      <div className='bg-[#2E4057] my-10 rounded-md'>
+        <h1 className='text-[#EFF1F3] p-4 font-medium text-lg'>List of Articles</h1>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 bg-[#EFF1F3] p-2 md:p-5 rounded-b-md'>
+          {posts?.map(post => <Card key={post.id} article={post} />)}
+        </div>
+
       </div>
     </section>
   )
-
 }
