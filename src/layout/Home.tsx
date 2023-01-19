@@ -17,12 +17,12 @@ const Home = () => {
     return !categories.includes(capitalizeText) && setCategories(prev => [...prev, capitalizeText])
   });
 
-  const fileredPostFromCategory = categories.slice(0, 5).map(category => postsData.filter(post => post.tags[0] === category.toLowerCase()))
+  const postFromCategory = categories.slice(0, 5).map(category => postsData.filter(post => post.tags[0] === category.toLowerCase()))
 
   return (
     <section>
       <div className='grid grid-cols-1 gap-6'>
-        {categories.slice(0, 5).map((category, index) => <Section key={index} category={category} postData={fileredPostFromCategory[index]} />)}
+        {categories.slice(0, 5).map((category, index) => <Section key={index} category={category} postData={postFromCategory[index]} />)}
       </div>
     </section>
   )
