@@ -25,7 +25,7 @@ export default function Card({ article }: IState) {
       </div>
       <Link
         to={`/article/${article.id}`}
-        className="inline-block rounded-md border border-transparent bg-[#F18F01] py-3 px-8 text-center font-medium text-white hover:bg-[#CB7A01] mt-10"
+        className="inline-block rounded-md border bg-[#F18F01] py-3 px-8 text-center font-medium text-white hover:bg-[#CB7A01] mt-10"
       >
         Read Article
       </Link>
