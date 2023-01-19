@@ -84,7 +84,7 @@ const Article = () => {
             <AuthorsBadge id={postsData.userId} url={usersData.image} name={usersData.firstName} lastName={usersData.lastName} />
             <Link
               to={`/`}
-              className="inline-block rounded-md border border-transparent bg-[#F18F01] py-3 px-8 text-center font-medium text-white hover:bg-[#CB7A01] mt-7 md:mr-5"
+              className="inline-block rounded-md border bg-[#F18F01] py-3 px-8 text-center font-medium text-white hover:bg-[#CB7A01] mt-7 md:mr-5"
             >
               Back to Home
             </Link>
