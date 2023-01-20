@@ -27,7 +27,7 @@ $ cd tiny_blog
 $ npm install
 ```
 
-Once the dependencies are installed, create your account and application in [Auth0](https://auth0.com/) and rename the file `example-auth0Config.ts` to `auth0Config.ts` and add the `DOMAIN` and `CLIENT_ID` from your Auth0 application, after you can start the development server with the following command:
+Once the dependencies are installed, create your account and application in [Auth0](https://auth0.com/), rename the file `example-auth0Config.ts` to `auth0Config.ts`, add the `DOMAIN` and `CLIENT_ID` from your Auth0 application, and after you can start the development server with the following command:
 
 ```bash
 $ npm start
